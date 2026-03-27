@@ -822,6 +822,9 @@ cfst.exe -f 1.txt
 
 ## 衍生项目
 
+- _[https://github.com/Hsia97/CFSTAPP](https://github.com/Hsia97/CFSTAPP)_  
+_**CFST 安卓版 APP [#638](https://github.com/XIU2/CloudflareSpeedTest/discussions/638)**_
+
 - _https://github.com/xianshenglu/cloudflare-ip-tester-app_  
 _**CFST 安卓版 APP [#202](https://github.com/XIU2/CloudflareSpeedTest/discussions/320)**_
 
