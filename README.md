@@ -212,6 +212,9 @@ https://github.com/XIU2/CloudflareSpeedTest
     -allip
         测速全部的IP；对 IP 段中的每个 IP (仅支持 IPv4) 进行测速；(默认 每个 /24 段随机测速一个 IP)
 
+    -insecure
+        跳过 TLS 证书验证；用于 HTTPing 延迟测速和下载测速时；(默认 验证证书)
+
     -debug
         调试输出模式；会在一些非预期情况下输出更多日志以便判断原因；(默认 关闭)
         目前该功能仅针对 HTTPing 延迟测速过程 及 下载测速过程，当过程中因为各种原因导致当前 IP 测速中断都会输出错误原因
@@ -772,6 +775,8 @@ cfst -f 1.txt
 这种是 **SSL 证书过期了或者尚未到有效时间**，除了这个原因外，也可能是和上面 4、5 的原因一样（这 4、5、6 三种报错可能会同时出现在同一个服务器 IP 上）
 7. `... tls: failed to verify certificate: x509: certificate signed by unknown authority.`  
 这种代表**系统证书配置有问题**，导致 TLS 握手时无法验证证书，目前只在 Termux 内遇到过（解决方法见：https://github.com/XIU2/CloudflareSpeedTest/discussions/61 帖子末尾）
+
+> 如果是因 **TLS 证书问题**（第 4、5、6、7 条）导致测速失败，可以尝试添加 `-insecure` 参数跳过 TLS 证书验证。
 
 > 如果你遇到了其他报错原因，且翻译后还是不懂，可以发 Issues 或 Discussions 询问，我也会更新到这里。  
 > 但注意，发 Issues 或 Discussions 询问时，请记得带上**调试模式下 CFST 输出的完整内容（或者完整截图）**。

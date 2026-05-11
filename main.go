@@ -68,6 +68,9 @@ https://github.com/XIU2/CloudflareSpeedTest
     -allip
         测速全部的IP；对 IP 段中的每个 IP (仅支持 IPv4) 进行测速；(默认 每个 /24 段随机测速一个 IP)
 
+    -insecure
+        跳过 TLS 证书验证；用于 HTTPing 延迟测速和下载测速时；(默认 验证证书)
+
     -debug
         调试输出模式；会在一些非预期情况下输出更多日志以便判断原因；(默认 关闭)
 
@@ -101,6 +104,8 @@ https://github.com/XIU2/CloudflareSpeedTest
 
 	flag.BoolVar(&task.Disable, "dd", false, "禁用下载测速")
 	flag.BoolVar(&task.TestAll, "allip", false, "测速全部 IP")
+
+	flag.BoolVar(&task.InsecureSkipVerify, "insecure", false, "跳过 TLS 证书验证")
 
 	flag.BoolVar(&utils.Debug, "debug", false, "调试输出模式")
 

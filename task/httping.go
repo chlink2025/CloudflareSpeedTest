@@ -1,7 +1,7 @@
 package task
 
 import (
-	//"crypto/tls"
+	"crypto/tls"
 
 	"io"
 	"log"
@@ -20,6 +20,7 @@ var (
 	HttpingStatusCode     int
 	HttpingCFColo         string
 	HttpingCFColomap      *sync.Map
+	InsecureSkipVerify    bool
 	RegexpColoIATACode    = regexp.MustCompile(`[A-Z]{3}`)  // 匹配 IATA 机场地区码（俗称 机场三字码）的正则表达式
 	RegexpColoCountryCode = regexp.MustCompile(`[A-Z]{2}`)  // 匹配国家地区码的正则表达式（如 US、CN、UK 等）
 	RegexpColoGcore       = regexp.MustCompile(`^[a-z]{2}`) // 匹配城市地区码的正则表达式（小写，如 us、cn、uk 等）
@@ -30,8 +31,8 @@ func (p *Ping) httping(ip *net.IPAddr) (int, time.Duration, string) {
 	hc := http.Client{
 		Timeout: time.Second * 2,
 		Transport: &http.Transport{
-			DialContext: getDialContext(ip),
-			//TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // 跳过证书验证
+			DialContext:     getDialContext(ip),
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: InsecureSkipVerify},
 		},
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
 			return http.ErrUseLastResponse // 阻止重定向
